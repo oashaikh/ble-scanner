@@ -9,6 +9,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\\n" + fh.read()
 
 remote_version = subprocess.run(["git", "describe", "--tags"], stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
+print("remote_version: ", remote_version)
 assert "." in remote_version, "Version number is not valid"
 
 
