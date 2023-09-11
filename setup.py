@@ -11,7 +11,6 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 remote_version = subprocess.run(["git", "describe", "--tags"], stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
 assert "." in remote_version, "Version number is not valid"
 
-assert os.path.isfile("ble_scanner/version.py")
 
 setup(
     name='ble_scanner',
