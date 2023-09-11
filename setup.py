@@ -17,7 +17,7 @@ setup(
     name='ble_scanner',
     version=remote_version,
     author="Osama Ashaikh",
-    author_email="oashaikhe@gmail.com",
+    author_email="oashaikh@gmail.com",
     description="BLE Beacon scanner",
     url = "https://github.com/oashaikh/ble-scanner",
     long_description_content_type="text/markdown",
