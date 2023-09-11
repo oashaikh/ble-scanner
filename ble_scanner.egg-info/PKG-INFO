@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ble-scanner
-Version: 1.0.5
+Version: 1.0.6
 Summary: BLE Beacon scanner
 Home-page: https://github.com/oashaikh/ble-scanner
 Author: Osama Ashaikh
@@ -40,13 +40,13 @@ Here's a quick example:
     import asyncio
     from ble_scanner.BLEScanner import BLEScanner
 
-    def main():
-       # Create a BLEScanner instance
+    async def main():
+    # Create a BLEScanner instance
         scanner = BLEScanner(target_mac="E2:15")  # Replace the MAC
-        scanner.initialize()
+        await scanner.initialize()
 
     if __name__ == "__main__":
-        main()
+        asyncio.run(main())
 
 
 For more advanced usage, refer to the documentation.

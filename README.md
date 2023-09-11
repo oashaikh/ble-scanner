@@ -27,13 +27,13 @@ Here's a quick example:
     import asyncio
     from ble_scanner.BLEScanner import BLEScanner
 
-    def main():
-       # Create a BLEScanner instance
+    async def main():
+    # Create a BLEScanner instance
         scanner = BLEScanner(target_mac="E2:15")  # Replace the MAC
-        scanner.initialize()
+        await scanner.initialize()
 
     if __name__ == "__main__":
-        main()
+        asyncio.run(main())
 
 
 For more advanced usage, refer to the documentation.
