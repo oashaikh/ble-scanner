@@ -1,19 +1,23 @@
 import asyncio
-from bleak import BleakScanner
+from bleak import BleakScanner, AdvertisementData
 import json
 import argparse
 
 class BLEScanner:
     def __init__(self, target_mac=None, continuous=True):
         self.target_mac = target_mac.lower().replace(":", "") if target_mac else None
-        self.scanner = BleakScanner()
-        self.scanner.register_detection_callback(self.detection_callback)
-        if continuous:
-            asyncio.run(self.continuous_scan())
+        self.continuous = continuous
+        self.scanner = None
 
-    async def detection_callback(self, device, advertisement_data):
+    async def initialize(self):
+        self.scanner = BleakScanner(detection_callback=self.detection_callback)  # Changed here
+        if self.continuous:
+            await self.continuous_scan()
+
+
+    async def detection_callback(self, device, advertisement_data: AdvertisementData):
         if self.filter_by_mac(device):
-            manufacturer_data = self.extract_manufacturer_data(device)
+            manufacturer_data = self.extract_manufacturer_data(advertisement_data)  # Changed here
             print(f"Manufacturer Data: {manufacturer_data}")
 
     @staticmethod
@@ -31,9 +35,9 @@ class BLEScanner:
         return metadata_dict
 
     @staticmethod
-    def extract_manufacturer_data(device):
+    def extract_manufacturer_data(advertisement_data: AdvertisementData):
         manufacturer_data_dict = {}
-        manufacturer_data = device.metadata.get('manufacturer_data', {})
+        manufacturer_data = advertisement_data.manufacturer_data  # Changed here
         for key, value in manufacturer_data.items():
             key_hex = hex(key).replace("0x", "")
             manufacturer_data_dict[key_hex] = value.hex()
@@ -49,11 +53,13 @@ class BLEScanner:
         await self.scanner.start()
         await asyncio.sleep(3600)  # Run for 1 hour, or until manually stopped
 
-# Argument parsing
-parser = argparse.ArgumentParser(description='BLE Scanner with Custom MAC Address')
-parser.add_argument('--mac', type=str, help='Specify the MAC address to scan for')
-args = parser.parse_args()
+async def main():
+    parser = argparse.ArgumentParser(description='BLE Scanner with Custom MAC Address')
+    parser.add_argument('--mac', type=str, help='Specify the MAC address to scan for')
+    args = parser.parse_args()
 
-# Usage as a standalone script
-if __name__ == "__main__":
     scanner = BLEScanner(target_mac=args.mac)
+    await scanner.initialize()
+
+if __name__ == "__main__":
+    asyncio.run(main())
