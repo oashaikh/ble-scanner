@@ -1,6 +1,6 @@
 
 # BLE Scanner Library
-
+[![Build and Publish to PyPI](https://github.com/oashaikh/ble-scanner/actions/workflows/python-publish.yml/badge.svg)](https://github.com/oashaikh/ble-scanner/actions/workflows/python-publish.yml)
 ## Description
 
 This is a Python library for scanning BLE beacon devices. It is built on top of the Bleak library and provides an easy-to-use API for BLE scanning.
