@@ -1,16 +1,22 @@
 from setuptools import setup, find_packages
 import codecs
 import os
+import subprocess
 
 here = os.path.abspath(os.path.dirname(__file__))
 
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\\n" + fh.read()
 
+remote_version = subprocess.run(["git", "describe", "--tags"], stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
+assert "." in remote_version, "Version number is not valid"
+
+assert os.path.isfile("ble_scanner/version.py")
+
 setup(
     name='ble_scanner',
-    version='{{VERSION_PLACEHOLDER}}',
-    author="John Doe",
+    version=remote_version,
+    author="Osama Ashaikh",
     author_email="oashaikhe@gmail.com",
     description="BLE Beacon scanner",
     url = "https://github.com/oashaikh/ble-scanner",
