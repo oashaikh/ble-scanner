@@ -1,0 +1,10 @@
+README.md
+setup.py
+ble_scanner/BLEScanner.py
+ble_scanner/__init__.py
+ble_scanner/cli.py
+ble_scanner.egg-info/PKG-INFO
+ble_scanner.egg-info/SOURCES.txt
+ble_scanner.egg-info/dependency_links.txt
+ble_scanner.egg-info/requires.txt
+ble_scanner.egg-info/top_level.txt

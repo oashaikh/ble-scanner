@@ -1,0 +1,4 @@
+Metadata-Version: 2.1
+Name: ble-scanner
+Version: 3.2
+Requires-Dist: bleak
