@@ -33,8 +33,6 @@ jobs:
         # Create the new tag
         git tag $newTag
         git push origin $newTag
-
-jobs:
   deploy:
 
     runs-on: ubuntu-latest
